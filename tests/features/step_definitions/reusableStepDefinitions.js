@@ -1,4 +1,4 @@
-var reusableStepDefinitions = function () {
+module.exports = function () {
 
   this.World = require("../support/world.js").World; // overwrite default World constructor
 
@@ -13,14 +13,23 @@ var reusableStepDefinitions = function () {
     // be executed by Cucumber.
   });
 
+  this.Given(/^a list of exercises$/, function (callback) {
+    // express the regexp above with the code you wish you had
+    callback.pending();
+  });
+
   this.When(/^I see the first page$/, function(callback) {
     // Express the regexp above with the code you wish you had. Call callback() at the end
     // of the step, or callback.pending() if the step is not yet implemented:
 
     // Nothing to do...here for readability
+    callback();
+
+  });
+
+  this.When(/^I select an exercise$/, function (callback) {
+    // express the regexp above with the code you wish you had
     callback.pending();
   });
 
 }
-
-module.exports = reusableStepDefinitions;

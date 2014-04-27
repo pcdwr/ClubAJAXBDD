@@ -4,7 +4,7 @@ Feature:  Create a new exercise in my collection
           I want to create a new exercise in my collection
 
           Scenario: Create a new exercise
-                    Given I navigate to the application
+                    Given I browse to the application
                     When I see the first page
                      And I click on the create exercise button
                     Then I can enter a new exercise
