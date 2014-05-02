@@ -115,7 +115,7 @@ describe('testExerciseService', function(){
       })
     })
   })
-  describe('deleteExercise', function () {
+  describe('updateExercise', function () {
     it('should update an exercise', function (done) {
       var exercise = {title:'temp2', desc: 'test update'};
       var exerciseFilter = { title: { $in: ['temp2']}};
