@@ -1,7 +1,33 @@
 <html>
   <head>
+    <title>My Exercises</title>
   </head>
   <body>
-    Hello
+    <div id="exercisesDiv"/>
+    <script src="tests/jquery-2.1.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+      var exercises;
+      var jqxhr = $.get( "/exercises", function(data) {
+      }, 'json')
+        .done(function(data) {
+          exercises = data;
+          displayExercises(exercises);
+        })
+    });
+    var displayExercises = function (exercises) {
+      var html = "<table id='exercises'>";
+      html += "<tr><th></th><th>Title</th><th>Description</th></tr>"
+      exercises.forEach( function(exercise) {
+        html += "<tr>";
+        html += "<td><input type='checkbox'></td>"
+        html += "<td>" + exercise.title + "</td>"
+        html += "<td>" + exercise.desc + "</td>"
+        html += "</tr>"
+      })
+      html += "</table>"
+      $("#exercisesDiv").html(html);
+    };
+    </script>
   </body>
 </html>

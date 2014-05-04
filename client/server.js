@@ -24,7 +24,7 @@ server.get('/exercises', function(req, res){
 
 server.post('/exercise', function(req, res) {
   exerciseService.createExercise(db, req.body, function (result) {
-    res.send(result);
+    res.send(result[0]);
   })
 });
 
@@ -41,8 +41,6 @@ server.get('/exercise/:filter', function(req, res) {
 });
 
 server.put('/exercise', function(req, res) {
-  console.log(req.body.filter);
-  console.log(req.body.exercise);
   exerciseService.updateExercise(db, req.body.filter, req.body.exercise, function(updatedExercise) {
     res.send(true);
   })

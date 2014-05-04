@@ -4,6 +4,7 @@ Feature:  View the details of an exercise
           I want to select the exercise and see the instructions
 
           Scenario: Read an exercise
-                    Given a list of exercises
-                    When I select an exercise
+                    Given I browse to the application
+                    When shown a list of exercises
+                     And I select an exercise
                     Then I should see the detailed instructions

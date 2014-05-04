@@ -32,26 +32,45 @@ describe("get list of exercises", function() {
       done();
     });
   });
+  it("should contain situp", function(done) {
+    var exercises;
+    var jqxhr = $.get( "/exercises", function(data) {
+    }, 'json')
+      .done(function(data) {
+        exercises = data;
+      })
+    jqxhr.always(function() {
+      Should.exist(exercises);
+      var foundExercise;
+      exercises.forEach(function(exercise) {
+        if (exercise.title === 'situp') {
+          foundExercise = exercise;
+          return;
+        }
+      })
+      Should.exist(foundExercise);
+      done();
+    });
+  });
 });
 
 describe('createExercise', function () {
   it('should add an exercise', function (done) {
     var exercise = {title:'jumping jack', desc: 'Jump up and down'};
-    var success;
-    var jqxhr = $.ajax({
-      url: '/exercise',
-      type: 'POST',
-      contentType: 'application/json',
-      data: JSON.stringify(exercise)}
-    )
+    var newEntry;
+    var jqxhr = $.post( "/exercise", exercise, function(data) {
+    }, 'json')
       .done(function(data) {
-        success = data;
+        newEntry = data;
       })
       .fail(function(result) {
         alert(result.responseText);
       })
     jqxhr.always(function() {
-      Should.exist(success);
+      Should.exist(newEntry);
+      // if it was added to the database it should have an id
+      Should.exist(newEntry._id);
+      newEntry.title.should.equal('jumping jack');
       done();
     });
   })
@@ -79,12 +98,8 @@ describe('updateExercise', function () {
       })
     jqxhr.always(function() {
       var exercise2;
-      var jqxhr2 = $.ajax({
-        url: '/exercise/' + exerciseFilter,
-        type: 'GET',
-        contentType: 'application/json',
-        data: JSON.stringify(exerciseFilter)}
-      )
+      var jqxhr2 = $.get( "/exercise/" + exerciseFilter, function(data) {
+      }, 'json')
         .done(function(data) {
           exercise2 = data;
         })
@@ -129,11 +144,8 @@ describe('readExercise', function () {
   it('should read an exercise', function (done) {
     var exerciseFilter = 'situp';
     var exercise;
-    var jqxhr = $.ajax({
-      url: '/exercise/' + exerciseFilter,
-      type: 'GET',
-      contentType: 'application/json'}
-    )
+    var jqxhr = $.get( "/exercise/" + exerciseFilter, function(data) {
+    }, 'json')
       .done(function(data) {
         exercise = data;
       })

@@ -4,6 +4,7 @@ Feature:  Delete an exercise
           I want to select the exercise and delete it
 
           Scenario: Delete an exercise
-                    Given a list of exercises
-                    When I select an exercise
+                    Given I browse to the application
+                    When shown a list of exercises
+                     And I select an exercise
                     Then I should be able to delete it
