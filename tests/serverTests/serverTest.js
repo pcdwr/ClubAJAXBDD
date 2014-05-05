@@ -4,7 +4,7 @@ var should = require("should");
 var exerciseService = require('../../server/exerciseService');
 
 before(function(done) {
-  db = mongo.db('mongodb://localhost:27017/BDDTest');
+  db = mongo.db('mongodb://localhost:27017/BDDTestBatch');
   db.createCollection('exercises', function(err, result) {
       db.collection('exercises').insert([{title: "pushup", desc: 'abc'},
                                           {title: "situp", desc: 'def'}], function(err, result) {

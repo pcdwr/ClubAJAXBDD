@@ -1,5 +1,5 @@
 var express = require('express');
-var exerciseService = require('../server/exerciseService');
+var exerciseService = require('./server/exerciseService');
 var mongo = require('mongoskin');
 var bodyparser = require('body-parser');
 
@@ -12,7 +12,7 @@ db.createCollection('exercises', function(err, result) {
 });
 
 var server = express();
-server.use(express.static(__dirname + '/static'));
+server.use(express.static(__dirname + '/client/static'));
 server.use(bodyparser());
 server.listen(8080);
 
